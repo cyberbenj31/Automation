@@ -1,0 +1,8 @@
+{
+    "loopbacks": [
+      {"name": "Loopback7", "ip": "7.7.7.7"},
+      {"name": "Loopback8", "ip": "8.8.8.8"},
+      {"name": "Loopback9", "ip": "9.9.9.9"}
+    ]
+  }
+  

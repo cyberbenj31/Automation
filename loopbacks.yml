@@ -1,0 +1,7 @@
+loopbacks:
+  - name: Loopback4
+    ip: 4.4.4.4
+  - name: Loopback5
+    ip: 5.5.5.5
+  - name: Loopback6
+    ip: 6.6.6.6
