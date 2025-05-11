@@ -1,0 +1,108 @@
+User Access Verification
+
+Username: admin
+Password: 
+site-b#guestshell enable
+site-b#guestshell run bash
+[guestshell@guestshell ~]$ 
+
+[guestshell@guestshell ~]$ echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+
+sudo su
+cd /etc/yum.repos.d/
+sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+yum update -y
+
+python3 -m pip install --upgrade pip
+python3 -m pip install ascii_magic
+python3 -m pip install beautifulsoup4
+python3 -m pip install requests
+
+[guestshell@guestshell yum.repos.d]$ sudo yum install nano
+[guestshell@guestshell yum.repos.d]$ nano loop1.py
+
+import cli
+
+cmd1 = '''hostname NETDEVOPS
+int loop 4
+ip add 4.4.4.4 255.255.255.255
+int loop 5
+ip add 5.5.5.5 255.255.255.255
+int lo 6
+ip add 6.6.6.6 255.255.255.255
+end
+'''
+
+cli.configurep(cmd1)
+
+[guestshell@guestshell ~]$ ls
+loop1.py
+[guestshell@guestshell ~]$ cat loop1.py
+[guestshell@guestshell ~]$ python3 loop1.py
+
+
+TASK2: ENABLE RESTAPI: with POSTMAN:
+
+config t
+ip http secure-server
+ip http authentication local
+restconf
+netconf-yang
+end
+
+POST address:
+https://192.168.102.11/restconf/data/ietf-interfaces:interfaces
+
+POST Authorization:
+admin
+pass
+
+POST Headers:
+Accept and Content type only
+
+POST BODY:
+{
+   "ietf-interfaces:interface": {
+      "name": "Loopback7",
+      "description": "Configured by RESTCONF",
+      "type": "iana-if-type:softwareLoopback",
+      "enabled": true,
+      "ietf-ip:ipv4": {
+           "address": [
+               {
+                "ip": "7.7.7.7",
+                "netmask": "255.255.255.255"
+               }
+           ]
+      }
+   },
+   "ietf-interfaces:interface": {
+    "name": "Loopback8",
+    "description": "Configured by RESTCONF",
+    "type": "iana-if-type:softwareLoopback",
+    "enabled": true,
+    "ietf-ip:ipv4": {
+         "address": [
+             {
+              "ip": "8.8.8.8",
+              "netmask": "255.255.255.255"
+             }
+         ]
+    }
+ },
+ "ietf-interfaces:interface": {
+    "name": "Loopback9",
+    "description": "Configured by RESTCONF",
+    "type": "iana-if-type:softwareLoopback",
+    "enabled": true,
+    "ietf-ip:ipv4": {
+         "address": [
+             {
+              "ip": "9.9.9.9",
+              "netmask": "255.255.255.255"
+             }
+         ]
+    }
+ }
+}
